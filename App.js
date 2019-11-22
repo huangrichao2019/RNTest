@@ -1,13 +1,16 @@
 import React from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-import HomeScreen from './pages/Home';
-import DetailsScreen from './pages/Details';
+import HomeScreen from './pages/HomeScreen';
+import DetailsScreen from './pages/DetailsScreen';
+import TestPage from './pages/TestPage';
 
 // 定义导航器 可定义默认
-const AppNavigator = createStackNavigator({
-  Home: HomeScreen,
-  Details: DetailsScreen,
+const AppNavigator = createStackNavigator(
+  {
+    Home: HomeScreen,
+    Details: DetailsScreen,
+    TestPage: TestPage,
 },
 {
   initialRouteName: 'Home',

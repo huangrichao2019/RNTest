@@ -21,8 +21,15 @@ class Blink extends Component {
     }
 
     return (
-      <Text >
-        {this.props.text}</Text>
+      <Text
+        // eslint-disable-next-line react-native/no-inline-styles
+        style={{
+          padding:15,
+          justifyContent: 'center',
+          color:841584
+        }}>
+        {this.props.text}
+      </Text>
     );
   }
 }
