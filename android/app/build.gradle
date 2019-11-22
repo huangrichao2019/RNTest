@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply plugin: 'com.growingio.android'
 
 import com.android.build.OutputFile
 
@@ -133,6 +134,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+            resValue("string", "growingio_project_id", "0a1b4118dd954ec3bcc69da5138bdb96")
+            resValue("string", "growingio_url_scheme", "growing.a0b4a508309fa11e")
     }
     splits {
         abi {
@@ -179,6 +182,13 @@ android {
 }
 
 dependencies {
+    //由于弹窗底层网络库依赖OkHttp3网络库，请添加OkHttp3依赖
+    implementation "com.squareup.okhttp3:okhttp:3.12.1"
+    //弹窗SDK依赖
+    implementation "com.growingio.android:gtouch:$gtouch_version"
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+
+    implementation 'com.growingio.android:vds-android-agent:RN-autotrack-2.8.6@aar'
     implementation project(':react-native-screens')
     implementation project(':react-native-gesture-handler')
     implementation project(':react-native-reanimated')
