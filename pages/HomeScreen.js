@@ -50,7 +50,7 @@ export default class HomeScreen extends Component {
             }}
           />
           <TouchableNativeFeedback onPress={this._onPressButton}>
-            <Text style={{color:841584,fontSize:18}}>跳转到原生页面</Text>
+            <Text style={styles.textContainer}>跳转到原生页面</Text>
           </TouchableNativeFeedback>
         </View>
         <View
@@ -109,6 +109,7 @@ export default class HomeScreen extends Component {
                  */
                 onClicked: (eventId, eventType, openUrl) => {
                   console.log('RNApp onClicked: eventId = ' + eventId + ', eventType = ' + eventType + ', openUrl = ' + openUrl);
+                  this.props.navigation.push({openUrl.slice(4)});
                 },
 
                 /**
@@ -151,8 +152,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  buttonContainer: {
-    margin: 20,
+  textContainer: {
+    fontSize:18,
+    padding: 5,
+    backgroundColor:'#111',
+    borderWidth:1,
+    borderColor:'#00ff00',
   },
   alternativeLayoutButtonContainer: {
     margin: 20,
