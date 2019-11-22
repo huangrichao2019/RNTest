@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -18,11 +19,14 @@ import com.growingio.android.sdk.collection.GrowingIO;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+
 public class TestPageActivity extends AppCompatActivity {
 
     private int count = 0;
     private String WELCOME_WORDS = "当前已点击图片：";
     private ImageView img = null;
+    private Button btn = null;
     private LinearLayout testPageLayout = null;
     private SpHelper mSpHelper;
     private String IMG_OPEN_CNT = "imgOpenCnt";
@@ -45,11 +49,22 @@ public class TestPageActivity extends AppCompatActivity {
         showToast(toastStr,800);
 
 
+
         final JSONObject visitor = new JSONObject();
         setContentView(R.layout.activity_test_page);
         GrowingIO.getInstance().track("TestPageOpen");
 
         testPageLayout =  findViewById(R.id.test_page);
+
+
+        btn = findViewById(R.id.btn_clear_data);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearAllData();
+                System.exit(0);
+            }
+        });
         img =  findViewById(R.id.img);
 
         img.setOnClickListener(new View.OnClickListener() {
@@ -96,5 +111,33 @@ public class TestPageActivity extends AppCompatActivity {
                 }, time);
             }
         });
+    }
+
+    public void clearAllData() {
+        deleteFile(new File("data/data/" + getPackageName()));
+        deleteFile(new File(getCacheDir().getAbsolutePath()));
+        Toast.makeText(this, "清除数据成功", Toast.LENGTH_SHORT).show();
+    }
+
+    private void deleteFile(File file) {
+        if (!file.exists()) {
+            return;
+        } else {
+            if (file.isFile()) {
+                file.delete();
+                return;
+            }
+            if (file.isDirectory()) {
+                File[] childFile = file.listFiles();
+                if (childFile == null || childFile.length == 0) {
+                    file.delete();
+                    return;
+                }
+                for (File f : childFile) {
+                    deleteFile(f);
+                }
+                file.delete();
+            }
+        }
     }
 }
