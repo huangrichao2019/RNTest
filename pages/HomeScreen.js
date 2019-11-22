@@ -50,7 +50,7 @@ export default class HomeScreen extends Component {
             }}
           />
           <TouchableNativeFeedback onPress={this._onPressButton}>
-            <Text style={{color:841584,fontSize:18}}>跳转到原生页面</Text>
+            <Text style={styles.textContainer}>跳转到原生页面</Text>
           </TouchableNativeFeedback>
         </View>
         <View
@@ -151,8 +151,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  buttonContainer: {
-    margin: 20,
+  textContainer: {
+    fontSize:18,
+    padding: 5,
+    backgroundColor:'#279',
+    borderWidth:1,
+    borderColor:'#00ff00',
   },
   alternativeLayoutButtonContainer: {
     margin: 20,
